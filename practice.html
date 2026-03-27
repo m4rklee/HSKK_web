@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HSK口语练习 - 正在练习</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --accent: #e94560;
+        --gold: #d4af37;
+        --cream: #faf8f5;
+    }
+    body {
+        font-family: 'Noto Serif SC', serif;
+        background-color: #faf8f5;
+        background-image:
+            radial-gradient(ellipse at 30% 0%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+            radial-gradient(ellipse at 70% 100%, rgba(233, 69, 96, 0.03) 0%, transparent 50%);
+    }
+    .gradient-text {
+        background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .mic-btn-pulse {
+        animation: micPulse 2s ease-in-out infinite;
+    }
+    @keyframes micPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.4); }
+        50% { box-shadow: 0 0 0 20px rgba(233, 69, 96, 0); }
+    }
+    .wave-bar {
+        animation: wave 1s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(1) { animation-delay: 0s; }
+    .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(6) { animation-delay: 0.5s; }
+    .wave-bar:nth-child(7) { animation-delay: 0.6s; }
+
+    @keyframes wave {
+        0%, 100% { height: 8px; }
+        50% { height: 32px; }
+    }
+    .fade-in { opacity: 0; transform: translateY(10px); animation: fadeInUp 0.5s ease forwards; }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body class="bg-[#FAFAF5] min-h-screen">
+<!-- 顶部状态栏 -->
+<header class="bg-white/80 backdrop-blur-xl border-b border-amber-100/50 px-6 py-4 flex justify-between items-center sticky top-0 z-10">
+<div class="flex items-center gap-5">
+<a class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-amber-50 transition-colors" href="javascript:history.back()">
+<iconify-icon class="text-xl text-gray-500" icon="lucide:x"></iconify-icon>
+</a>
+<div>
+<h1 class="font-bold text-xl text-gray-800" id="pageTitle">中级练习：看图说话</h1>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs text-gray-400 font-medium">模拟考试模式</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 bg-gradient-to-r from-rose-50 to-orange-50 px-5 py-2.5 rounded-2xl border border-rose-100">
+<iconify-icon class="text-rose-500 text-xl" icon="lucide:timer"></iconify-icon>
+<span class="font-mono text-2xl font-bold text-rose-600" id="countdown">02:00</span>
+</div>
+<button class="bg-gradient-to-r from-amber-500 to-rose-500 text-white px-7 py-3 rounded-2xl font-bold shadow-lg shadow-rose-200 hover:shadow-xl hover:scale-105 transition-all duration-300">提交作答</button>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 py-10">
+<!-- 题目说明卡片 -->
+<div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-[2rem] p-7 mb-8 text-white flex items-start gap-5 shadow-2xl shadow-gray-200 fade-in">
+<div class="w-14 h-14 bg-gradient-to-r from-amber-400 to-rose-500 rounded-2xl flex items-center justify-center shrink-0">
+<iconify-icon class="text-2xl text-white" icon="lucide:info"></iconify-icon>
+</div>
+<div>
+<h2 class="font-bold text-xl mb-2">题目说明</h2>
+<p class="text-gray-300 text-sm leading-relaxed" id="instruction">
+    请观察下方图片，并根据图片内容说一段话。你可以从人物、地点、动作和发生的事件等方面进行描述。建议说 8-10 句话。
+</p>
+</div>
+</div>
+<div class="grid lg:grid-cols-2 gap-8 items-start">
+<!-- 题目展示区 -->
+<div class="bg-white rounded-[2.5rem] p-8 elegant-shadow border border-amber-100/30 min-h-[400px] flex flex-col items-center justify-center fade-in">
+<!-- 看图模式 -->
+<div class="w-full" id="pictureContainer">
+<div class="relative rounded-3xl overflow-hidden mb-5">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+    <img alt="A family eating dinner together and talking" class="w-full aspect-video object-cover rounded-3xl border-4 border-white shadow-lg" src="https://modao.cc/agent-py/media/generated_images/2026-03-27/248032590cb444b78c00f0152c991291.jpg"/>
+</div>
+<p class="text-center text-gray-400 text-sm font-medium">提示图：全家吃晚饭</p>
+</div>
+<!-- 朗读/问题模式 (初始隐藏) -->
+<div class="hidden w-full space-y-4" id="textContainer">
+<div class="p-10 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border-2 border-amber-100/50 text-xl leading-loose text-gray-700 font-medium shadow-inner">
+    中国有句古话叫"民以食为天"，这说明了饮食在人们生活中的重要地位。随着时代的进步，人们不仅追求吃得饱，更追求吃得健康、吃得有文化。
+</div>
+</div>
+<!-- 听后模式 (初始隐藏) -->
+<div class="hidden flex flex-col items-center gap-6" id="audioContainer">
+<div class="relative">
+    <div class="w-28 h-28 bg-gradient-to-br from-amber-400 to-rose-500 rounded-full flex items-center justify-center animate-pulse">
+    <iconify-icon class="text-rose-600 text-5xl" icon="lucide:volume-2"></iconify-icon>
+    </div>
+    <div class="absolute -inset-4 bg-gradient-to-br from-amber-400/20 to-rose-500/20 rounded-full blur-xl"></div>
+</div>
+<p class="text-rose-600 font-bold text-lg">正在播放题目音频...</p>
+<div class="w-72 h-2.5 bg-gray-100 rounded-full overflow-hidden">
+<div class="w-1/3 h-full bg-gradient-to-r from-amber-400 to-rose-500 rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+<!-- 录音交互区 -->
+<div class="flex flex-col gap-6">
+<div class="bg-white rounded-[2.5rem] p-10 elegant-shadow border border-amber-100/30 text-center fade-in">
+<h3 class="font-bold text-gray-700 mb-8 uppercase tracking-[0.2em] text-sm">点击麦克风开始录音</h3>
+<div class="relative inline-block mb-8">
+<!-- 波纹动画 -->
+<div class="absolute inset-0 bg-rose-400 rounded-full opacity-0 scale-100" id="ripple"></div>
+<button class="relative z-10 w-28 h-28 bg-gradient-to-br from-amber-500 to-rose-500 rounded-full flex items-center justify-center shadow-2xl shadow-rose-200 transition-all hover:scale-110 active:scale-95 group" id="micBtn">
+<iconify-icon class="text-white text-5xl" icon="lucide:mic" id="micIcon"></iconify-icon>
+</button>
+</div>
+<div class="text-gray-400 font-medium mb-8 text-lg" id="recordingStatus">等待录音...</div>
+<!-- 简易声波模拟 -->
+<div class="flex justify-center items-end gap-2 h-12 mb-8 opacity-30" id="waveforms">
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+<div class="w-2 bg-rose-400 rounded-full wave-bar"></div>
+</div>
+<a class="block w-full py-5 bg-gray-100 text-gray-400 rounded-2xl font-bold hover:bg-emerald-500 hover:text-white transition-all cursor-not-allowed text-center" href="result.html" id="submitBtn">
+    完成并提交
+</a>
+</div>
+<div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-[2rem] p-6 border border-amber-100 fade-in">
+<h4 class="text-amber-800 font-bold mb-3 flex items-center gap-2">
+<iconify-icon class="text-amber-500" icon="lucide:sparkles"></iconify-icon>
+    智能助手建议
+</h4>
+<p class="text-amber-700 text-sm leading-relaxed">
+    当前题目建议录音时长 45-60 秒。请保持语速平稳，不要太快也不要太慢。如果卡住了，请深呼吸并继续，AI 会自动过滤重复内容。
+</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+    // 简易页面逻辑控制
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
+    const level = urlParams.get('level');
+
+    // 获取等级前缀
+    const levelPrefix = level === 'beg' ? '初级' : (level === 'int' ? '中级' : (level === 'adv' ? '高级' : ''));
+
+    // 根据 URL 参数调整内容
+    if(type === 'reading') {
+        document.getElementById('pageTitle').innerText = levelPrefix + '练习：朗读';
+        document.getElementById('instruction').innerText = '请用流利且自然的语调朗读下方的文字。注意停顿、语气起伏。';
+        document.getElementById('pictureContainer').classList.add('hidden');
+        document.getElementById('textContainer').classList.remove('hidden');
+    } else if(type === 'repeat' || type === 'retell' || type === 'qa') {
+        let title = '听后重复';
+        let desc = '请先仔细聆听音频。音频播放结束后，请立即重复出你听到的内容。';
+        if(type === 'retell') {
+            title = '听后复述';
+            desc = '请先仔细聆听一段话。音频播放结束后，请根据记忆复述该段话的内容。';
+        } else if(type === 'qa') {
+            title = '听后回答';
+            desc = '请先仔细聆听问题。音频播放结束后，请简洁明了地回答该问题。';
+        }
+        document.getElementById('pageTitle').innerText = levelPrefix + '练习：' + title;
+        document.getElementById('instruction').innerText = desc;
+        document.getElementById('pictureContainer').classList.add('hidden');
+        document.getElementById('audioContainer').classList.remove('hidden');
+    } else if(type === 'answer' || type === 'question' || !type) {
+        document.getElementById('pageTitle').innerText = levelPrefix + '练习：回答问题';
+        document.getElementById('instruction').innerText = '请根据以下问题，用普通话进行回答，录音时长建议为 1-2 分钟。';
+        document.getElementById('pictureContainer').classList.add('hidden');
+        document.getElementById('textContainer').classList.remove('hidden');
+        const qDiv = document.getElementById('textContainer').querySelector('div');
+        qDiv.innerText = '如果现在你有一个月的假期，你打算做什么？';
+        qDiv.className = 'p-14 bg-white rounded-3xl border-2 border-amber-100 text-3xl leading-relaxed text-amber-600 font-bold text-center shadow-inner';
+    } else if(type === 'picture') {
+        document.getElementById('pageTitle').innerText = levelPrefix + '练习：看图说话';
+        document.getElementById('instruction').innerText = '请观察下方图片，并根据图片内容说一段话。建议说 8-10 句话。';
+        document.getElementById('pictureContainer').classList.remove('hidden');
+        document.getElementById('textContainer').classList.add('hidden');
+        document.getElementById('audioContainer').classList.add('hidden');
+    }
+
+    // 顶栏按钮点击
+    document.querySelector('header button').onclick = () => {
+        window.location.href = 'result.html';
+    };
+
+    // 顶部总计时器
+    let totalSeconds = 120;
+    const countdownEl = document.getElementById('countdown');
+    const mainTimer = setInterval(() => {
+        if(totalSeconds <= 0) {
+            clearInterval(mainTimer);
+            return;
+        }
+        totalSeconds--;
+        const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+        const s = (totalSeconds % 60).toString().padStart(2, '0');
+        countdownEl.innerText = `${m}:${s}`;
+    }, 1000);
+
+    // 录音按钮模拟交互
+    let isRecording = false;
+    let timerInterval;
+    let seconds = 0;
+    const micBtn = document.getElementById('micBtn');
+    const micIcon = document.getElementById('micIcon');
+    const status = document.getElementById('recordingStatus');
+    const ripple = document.getElementById('ripple');
+    const waveforms = document.getElementById('waveforms');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function updateTimer() {
+        seconds++;
+        const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const secs = (seconds % 60).toString().padStart(2, '0');
+        status.innerText = `正在录音... ${mins}:${secs}`;
+    }
+
+    micBtn.onclick = () => {
+        isRecording = !isRecording;
+        if(isRecording) {
+            seconds = 0;
+            micBtn.classList.remove('from-amber-500', 'to-rose-500');
+            micBtn.classList.add('from-rose-500', 'to-red-600');
+            micBtn.classList.add('ring-8', 'ring-rose-100');
+            micIcon.setAttribute('icon', 'lucide:square');
+            status.innerText = '正在录音... 00:00';
+            status.classList.replace('text-gray-400', 'text-rose-500');
+            ripple.classList.add('animate-ping');
+            ripple.classList.replace('opacity-0', 'opacity-30');
+            waveforms.classList.remove('opacity-30');
+            submitBtn.classList.add('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        } else {
+            clearInterval(timerInterval);
+            micBtn.classList.add('from-amber-500', 'to-rose-500');
+            micBtn.classList.remove('from-rose-500', 'to-red-600');
+            micBtn.classList.remove('ring-8', 'ring-rose-100');
+            micIcon.setAttribute('icon', 'lucide:refresh-cw');
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            status.innerText = `录音已完成 (${mins > 0 ? mins + '分' : ''}${secs}秒)`;
+            status.classList.replace('text-rose-500', 'text-emerald-500');
+            ripple.classList.remove('animate-ping');
+            ripple.classList.replace('opacity-30', 'opacity-0');
+            waveforms.classList.add('opacity-30');
+            submitBtn.innerText = '提交录音';
+            submitBtn.className = 'block w-full py-5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl font-bold hover:from-emerald-600 hover:to-teal-600 transition-all shadow-lg shadow-emerald-100 text-center';
+            submitBtn.classList.remove('hidden');
+        }
+    };
+</script>
+</body>
+</html>

@@ -21,28 +21,37 @@
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     .history-item { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .history-item:hover { transform: translateX(8px); box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.15); }
+    @media (max-width: 768px) {
+        .stats-section { grid-template-columns: 1fr; }
+        .chart-card { padding: 1.5rem; border-radius: 1.5rem; }
+        .chart-card h3 { font-size: 1.125rem; margin-bottom: 1rem; }
+        .summary-card { padding: 1.5rem; border-radius: 1.5rem; }
+        .history-list { padding: 1.5rem; border-radius: 1.5rem; }
+        .history-item { flex-direction: column; gap: 1rem; padding: 1rem; }
+        .history-item .date-box { width: 100%; flex-direction: row; justify-content: center; }
+    }
 </style>
 </head>
 <body class="bg-gradient-to-br from-amber-50/50 via-white to-rose-50/30 min-h-screen">
 <nav class="bg-white/70 backdrop-blur-xl border-b border-amber-100/50 sticky top-0 z-10">
-<div class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
-<a class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-amber-50 transition-colors" href="index.html">
-<iconify-icon class="text-xl text-gray-500" icon="lucide:arrow-left"></iconify-icon>
+<div class="max-w-7xl mx-auto px-4 h-14 md:h-16 flex items-center gap-3 md:gap-4">
+<a class="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl hover:bg-amber-50 transition-colors" href="index.html">
+<iconify-icon class="text-lg md:text-xl text-gray-500" icon="lucide:arrow-left"></iconify-icon>
 </a>
-<h1 class="font-bold text-gray-800 text-lg">学习成长足迹</h1>
+<h1 class="font-bold text-gray-800 text-base md:text-lg">学习成长足迹</h1>
 </div>
 </nav>
-<main class="max-w-5xl mx-auto px-4 py-10">
+<main class="max-w-5xl mx-auto px-4 py-6 md:py-10">
 <!-- 统计图表区 -->
-<div class="grid md:grid-cols-3 gap-6 mb-8">
-<div class="md:col-span-2 bg-white rounded-[2.5rem] p-8 elegant-shadow border border-amber-100/30 fade-in">
-<h3 class="font-bold text-gray-800 text-xl mb-6 flex items-center gap-2">
+<div class="stats-section grid md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+<div class="chart-card md:col-span-2 bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-8 elegant-shadow border border-amber-100/30 fade-in">
+<h3 class="font-bold text-gray-800 text-base md:text-xl mb-4 md:mb-6 flex items-center gap-2">
 <iconify-icon class="text-amber-500" icon="lucide:trending-up"></iconify-icon>
 成绩变化趋势
 </h3>
-<div class="w-full h-64" id="trendChart"></div>
+<div class="w-full h-40 md:h-64" id="trendChart"></div>
 </div>
-<div class="bg-gradient-to-br from-gray-900 via-indigo-900 to-gray-900 rounded-[2.5rem] p-8 text-white flex flex-col justify-between border border-white/10 fade-in">
+<div class="summary-card bg-gradient-to-br from-gray-900 via-indigo-900 to-gray-900 rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-8 text-white flex flex-col justify-between border border-white/10 fade-in">
 <div>
 <h3 class="font-bold text-xl mb-2 flex items-center gap-2">
 <iconify-icon class="text-amber-400" icon="lucide:bar-chart-2"></iconify-icon>

@@ -49,13 +49,21 @@
     .progress-bar {
         transition: width 1s ease-out;
     }
+    @media (max-width: 768px) {
+        .score-section { flex-direction: column; gap: 1.5rem; }
+        .score-card { padding: 1.5rem; border-radius: 1.5rem; }
+        .analysis-card { padding: 1.5rem; border-radius: 1.5rem; }
+        .text-display { padding: 1.5rem; font-size: 1.25rem; line-height: 2.5rem; }
+        .modal-content { padding: 1.5rem; border-radius: 1.5rem; }
+        .action-buttons { grid-template-columns: 1fr; }
+    }
 </style>
 </head>
 <body class="bg-gradient-to-br from-amber-50/50 via-white to-rose-50/30 min-h-screen">
 <nav class="bg-white/70 backdrop-blur-xl border-b border-amber-100/50 sticky top-0 z-10">
-<div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-<a class="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors" href="index.html">
-<iconify-icon icon="lucide:home"></iconify-icon>
+<div class="max-w-7xl mx-auto px-4 h-14 md:h-16 flex justify-between items-center">
+<a class="flex items-center gap-1 md:gap-2 text-sm md:text-base text-gray-600 hover:text-gray-900 font-medium transition-colors" href="index.html">
+<iconify-icon class="text-lg md:text-xl" icon="lucide:home"></iconify-icon>
 <span>返回主页</span>
 </a>
 <h1 class="font-bold text-gray-800 text-lg">练习分析报告</h1>
@@ -67,25 +75,19 @@
 </nav>
 <main class="max-w-5xl mx-auto px-4 py-10">
 <!-- 评分概览卡片 -->
-<div class="bg-white rounded-[3rem] p-10 elegant-shadow border border-amber-100/30 mb-10 fade-in">
-<div class="grid md:grid-cols-3 gap-10 items-center text-center">
+<div class="score-card bg-white rounded-[1.5rem] md:rounded-[3rem] p-5 md:p-10 elegant-shadow border border-amber-100/30 mb-6 md:mb-10 fade-in">
+<div class="score-section grid md:grid-cols-3 gap-6 md:gap-10 items-center text-center">
 <div>
-<div class="inline-block relative mb-4">
-    <svg class="w-36 h-36 transform -rotate-90">
-    <circle class="text-amber-50" cx="72" cy="72" fill="transparent" r="60" stroke="currentColor" stroke-width="10"></circle>
-    <circle class="text-transparent score-ring" cx="72" cy="72" fill="transparent" r="60" stroke="url(#gradient)" stroke-width="10" stroke-linecap="round">
+<div class="inline-block relative mb-3 md:mb-4">
+    <svg class="w-24 h-24 md:w-36 md:h-36 transform -rotate-90">
+    <circle class="text-amber-50" cx="48" md:cx="72" cy="48" md:cy="72" fill="transparent" r="40" md:r="60" stroke="currentColor" stroke-width="8" md:stroke-width="10"></circle>
+    <circle class="text-transparent score-ring" cx="48" md:cx="72" cy="48" md:cy="72" fill="transparent" r="40" md:r="60" stroke="url(#gradient)" stroke-width="8" md:stroke-width="10" stroke-linecap="round">
         <animate attributeName="stroke-dashoffset" from="377" to="52" dur="1.5s" fill="freeze" />
     </circle>
-    <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e94560"/>
-            <stop offset="100%" stop-color="#d4af37"/>
-        </linearGradient>
-    </defs>
     </svg>
     <div class="absolute inset-0 flex flex-col items-center justify-center">
-    <span class="text-4xl font-bold gradient-text">85</span>
-    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">总分</span>
+    <span class="text-2xl md:text-4xl font-bold gradient-text">85</span>
+    <span class="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest">总分</span>
     </div>
 </div>
 <div class="text-2xl font-bold text-gray-800">成绩优良</div>
@@ -177,8 +179,8 @@
 <iconify-icon class="text-xl" icon="lucide:refresh-cw"></iconify-icon>
 再练一次
 </a>
-<a class="bg-white text-gray-600 p-7 rounded-[2.5rem] text-center font-bold shadow-lg border border-gray-100 hover:border-amber-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2" href="history.html">
-<iconify-icon class="text-xl" icon="lucide:history"></iconify-icon>
+<a class="bg-white text-gray-600 p-5 md:p-7 rounded-[1.5rem] md:rounded-[2.5rem] text-center font-bold shadow-lg border border-gray-100 hover:border-amber-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2" href="history.html">
+<iconify-icon class="text-lg md:text-xl" icon="lucide:history"></iconify-icon>
 查看历史成长
 </a>
 </div>

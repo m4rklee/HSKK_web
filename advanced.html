@@ -23,26 +23,35 @@
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     .pulse-dot { animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
+    @media (max-width: 768px) {
+        .nav-title { display: none; }
+        .main-card { padding: 1.5rem; border-radius: 1.5rem; }
+        .card-title { font-size: 1.75rem; }
+        .type-grid { gap: 1rem; }
+        .type-btn { padding: 1rem; border-radius: 1.25rem; }
+        .stat-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+        .stat-card { padding: 1rem; }
+    }
 </style>
 </head>
 <body class="bg-gradient-to-br from-purple-50/50 via-white to-rose-50/30 min-h-screen">
 <nav class="bg-white/70 backdrop-blur-xl border-b border-amber-100/50 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between h-16 items-center">
-<a class="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors" href="index.html">
-<iconify-icon class="text-lg" icon="lucide:chevron-left"></iconify-icon>
-<span>返回首页</span>
+<div class="max-w-7xl mx-auto px-4">
+<div class="flex justify-between h-14 md:h-16 items-center">
+<a class="flex items-center gap-1 md:gap-2 text-sm md:text-base text-gray-600 hover:text-gray-900 font-medium transition-colors" href="index.html">
+<iconify-icon class="text-lg md:text-xl" icon="lucide:chevron-left"></iconify-icon>
+<span class="hidden sm:inline">返回首页</span>
 </a>
-<div class="text-lg font-bold text-gray-800 flex items-center gap-2">
+<div class="text-sm md:text-lg font-bold text-gray-800 flex items-center gap-2">
 <span class="w-2 h-2 bg-purple-400 rounded-full pulse-dot"></span>
-HSKK（高级）备考专区
+<span class="nav-title">HSKK（高级）备考专区</span>
 </div>
-<div class="w-20"></div>
+<div class="w-10 md:w-20"></div>
 </div>
 </div>
 </nav>
-<main class="max-w-4xl mx-auto px-4 py-12">
-<div class="bg-white rounded-[2.5rem] p-10 elegant-shadow mb-10 overflow-hidden relative border border-amber-100/30 fade-in">
+<main class="max-w-4xl mx-auto px-4 py-6 md:py-12">
+<div class="main-card bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-10 elegant-shadow mb-6 md:mb-10 overflow-hidden relative border border-amber-100/30 fade-in">
 <div class="relative z-10">
 <div class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-rose-100 text-purple-700 px-5 py-2 rounded-full text-sm font-semibold mb-6">
 <iconify-icon class="text-purple-500" icon="lucide:sparkles"></iconify-icon>

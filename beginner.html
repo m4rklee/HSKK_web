@@ -48,36 +48,47 @@
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.7; transform: scale(1.1); }
     }
+    @media (max-width: 768px) {
+        .nav-title { display: none; }
+        .main-card { padding: 1.5rem; border-radius: 1.5rem; }
+        .card-title { font-size: 1.75rem; }
+        .card-desc { font-size: 1rem; margin-bottom: 1.5rem; }
+        .type-grid { gap: 1rem; }
+        .type-btn { padding: 1rem; border-radius: 1.25rem; }
+        .type-icon { width: 3rem; height: 3rem; }
+        .type-icon-box { width: 3.5rem; height: 3.5rem; }
+        .tip-grid { grid-template-columns: 1fr; }
+    }
 </style>
 </head>
 <body class="bg-gradient-to-br from-amber-50/50 via-white to-rose-50/30 min-h-screen">
 <nav class="bg-white/70 backdrop-blur-xl border-b border-amber-100/50 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between h-16 items-center">
-<a class="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors" href="index.html">
-<iconify-icon class="text-lg" icon="lucide:chevron-left"></iconify-icon>
-<span>返回首页</span>
+<div class="max-w-7xl mx-auto px-4">
+<div class="flex justify-between h-14 md:h-16 items-center">
+<a class="flex items-center gap-1 md:gap-2 text-sm md:text-base text-gray-600 hover:text-gray-900 font-medium transition-colors" href="index.html">
+<iconify-icon class="text-lg md:text-xl" icon="lucide:chevron-left"></iconify-icon>
+<span class="hidden sm:inline">返回首页</span>
 </a>
-<div class="text-lg font-bold text-gray-800 flex items-center gap-2">
+<div class="text-sm md:text-lg font-bold text-gray-800 flex items-center gap-2">
 <span class="w-2 h-2 bg-emerald-400 rounded-full pulse-dot"></span>
-HSKK（初级）备考专区
+<span class="nav-title">HSKK（初级）备考专区</span>
 </div>
-<div class="w-20"></div>
+<div class="w-10 md:w-20"></div>
 </div>
 </div>
 </nav>
-<main class="max-w-4xl mx-auto px-4 py-12">
-<div class="bg-white rounded-[2.5rem] p-10 elegant-shadow mb-10 overflow-hidden relative border border-amber-100/30 fade-in">
+<main class="max-w-4xl mx-auto px-4 py-6 md:py-12">
+<div class="main-card bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-10 elegant-shadow mb-6 md:mb-10 overflow-hidden relative border border-amber-100/30 fade-in">
 <div class="relative z-10">
-<div class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 px-5 py-2 rounded-full text-sm font-semibold mb-6">
-<iconify-icon class="text-emerald-500" icon="lucide:sparkles"></iconify-icon>
+<div class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 px-3 md:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-4 md:mb-6">
+<iconify-icon class="text-emerald-500 text-sm md:text-base" icon="lucide:sparkles"></iconify-icon>
 <span>掌握200词即可挑战</span>
 </div>
-<h1 class="text-4xl font-bold text-gray-800 mb-4">初级题型入口</h1>
-<p class="text-gray-500 mb-10 text-lg leading-relaxed">初级口语考试主要考察你的基础模仿能力和简单的交际对话。</p>
-<div class="grid gap-5">
+<h1 class="card-title text-2xl md:text-4xl font-bold text-gray-800 mb-2 md:mb-4">初级题型入口</h1>
+<p class="card-desc text-gray-500 text-sm md:text-lg leading-relaxed mb-6 md:mb-10">初级口语考试主要考察你的基础模仿能力和简单的交际对话。</p>
+<div class="type-grid grid gap-4 md:gap-5">
 <!-- 题型1 -->
-<a class="level-btn group flex items-center p-7 bg-gradient-to-br from-emerald-50 to-white rounded-[2rem] border-2 border-transparent hover:border-emerald-300 transition-all" href="practice.html?level=beg&type=repeat">
+<a class="level-btn group flex items-center p-5 md:p-7 bg-gradient-to-br from-emerald-50 to-white rounded-[1.25rem] md:rounded-[2rem] border-2 border-transparent hover:border-emerald-300 transition-all" href="practice.html?level=beg&type=repeat">
 <div class="relative mr-6">
     <div class="absolute inset-0 bg-emerald-200 rounded-2xl blur-md opacity-30"></div>
     <div class="relative w-14 h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -131,15 +142,15 @@ HSKK（初级）备考专区
 </div>
 </div>
 <!-- 考试贴士 -->
-<div class="grid md:grid-cols-2 gap-6">
-<div class="bg-white p-8 rounded-[2rem] elegant-shadow border border-amber-100/30 fade-in fade-in-delay-1">
-<h4 class="font-bold text-gray-800 mb-5 flex items-center gap-2 text-lg">
+<div class="tip-grid grid md:grid-cols-2 gap-4 md:gap-6">
+<div class="bg-white p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] elegant-shadow border border-amber-100/30 fade-in fade-in-delay-1">
+<h4 class="font-bold text-gray-800 mb-4 md:mb-5 flex items-center gap-2 text-base md:text-lg">
 <iconify-icon class="text-amber-500" icon="lucide:info"></iconify-icon>
     初级考试流程
 </h4>
-<ul class="text-sm text-gray-500 space-y-4">
-<li class="flex items-start gap-3">
-<span class="w-7 h-7 bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</span>
+<ul class="text-sm text-gray-500 space-y-3 md:space-y-4">
+<li class="flex items-start gap-2 md:gap-3">
+<span class="w-6 h-6 md:w-7 md:h-7 bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</span>
 <div>
 <span class="font-medium text-gray-700">听后重复</span>
 <span class="text-amber-600 ml-2">(6分钟)</span>
@@ -172,7 +183,7 @@ HSKK（初级）备考专区
 <p class="text-amber-700 text-sm leading-relaxed">
     在"听后重复"环节，不要担心漏掉个别词汇，要保持语流的完整。在"回答问题"环节，尽量多使用已学的关联词（如：因为...所以...）。
 </p>
-<button class="mt-5 text-sm font-bold text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-all">查看更多提分技巧</button>
+<button class="mt-4 md:mt-5 text-sm font-bold text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-all">查看更多提分技巧</button>
 </div>
 </div>
 </main>
